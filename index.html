@@ -189,6 +189,8 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
 .footer .links{display:flex;align-items:center;gap:40px;font-size:15px;color:var(--cream);flex-wrap:wrap}
 .footer .links a{display:inline-flex;align-items:center;gap:8px}
 .footer .links .wa{color:#25D366}.footer .links .wa:hover{color:#4ef08c}
+.footer .links .tel{color:var(--rust-lt)}.footer .links .tel:hover{color:var(--gold)}
+.footer .links .tel .num{font-family:var(--f-latin);font-size:20px;font-weight:700;color:var(--cream)}
 .footer .links .wa .num{font-family:var(--f-latin);font-size:20px;font-weight:700;color:var(--cream)}
 .footer .links .num{font-family:var(--f-latin);font-size:22px;font-weight:700}
 .footer .row2{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:32px;padding-top:24px;border-top:1px solid var(--brown-2);font-size:13px;color:var(--muted-2)}
@@ -227,8 +229,11 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   .swipe{display:flex;justify-content:center;gap:6px;margin-top:2px}
   .swipe span{width:6px;height:6px;border-radius:50%;background:var(--muted-2);opacity:.45;transition:opacity .25s,width .25s}
   .swipe span.on{opacity:1;width:18px;border-radius:3px;background:var(--rust)}
-  .cd-wrap .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .cd{width:auto;height:84px;border-radius:14px}.cd b{font-size:38px}.cd span{font-size:11px}
+  .cd-wrap .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+      background:rgba(246,241,234,.16);border-radius:16px;overflow:hidden;
+      box-shadow:0 16px 34px -20px rgba(42,29,22,.9)}
+  .cd{width:auto;height:auto;padding:13px 4px;border-radius:0;gap:4px}
+  .cd.first{background:var(--ink)}.cd.first span{color:var(--gold)}
   .actions{flex-direction:column}.btn{height:54px;font-size:16px;width:100%}
   .offers{padding-block:52px 56px}
   .sec-head{flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:26px}
@@ -275,9 +280,10 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   .final .actions{flex-direction:row;gap:9px}
   .final .actions .btn{height:46px;font-size:14px;padding:0 10px;flex:1;width:auto}
   .final .btn-white .num{font-size:19px}
-  .final .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-  .final .cd{width:auto;height:56px;border-radius:12px;gap:1px}
-  .final .cd b{font-size:23px}.final .cd span{font-size:9.5px}
+  .final .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+      background:rgba(255,255,255,.28);border-radius:14px;overflow:hidden;box-shadow:none}
+  .final .cd{width:auto;height:auto;padding:10px 4px;border-radius:0;gap:2px;background:rgba(42,29,22,.45)}
+  .final .cd b{font-size:22px}.final .cd span{font-size:9.5px}
   .footer{padding-block:28px}
   .footer .row1{gap:16px}
   .footer .brand-logo{height:34px}
@@ -294,10 +300,10 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   .hero p{font-size:14px;line-height:1.7}
   .fan-wrap .card{width:268px}
   .fan-wrap .card .img{width:268px;height:334px}
-  .cd-label{font-size:12px;margin-bottom:8px}
-  .cd{height:64px;border-radius:12px;gap:2px}
-  .cd b{font-size:28px}
-  .cd span{font-size:10px}
+  .cd-label{font-size:12.5px;margin-bottom:10px}
+  .cd{height:auto;padding:12px 4px}
+  .cd b{font-size:27px}
+  .cd span{font-size:10px;letter-spacing:.3px}
   .hero .actions{flex-direction:row;gap:10px}
   .hero .btn{height:48px;font-size:15px;padding:0 12px;flex:1}
 }
@@ -558,7 +564,10 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
            alt="نجيب سليم — Naguib Selim · Fabrics &amp; More" loading="lazy">
     </div>
     <div class="links">
-      <a href="tel:19976">الخط الساخن <span class="num" dir="ltr">19976</span></a>
+      <a class="tel" href="tel:19976">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+        الخط الساخن <span class="num" dir="ltr">19976</span>
+      </a>
       <a class="wa" data-wa="general" href="#" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5v-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.6 4 5.3 5.3 0 0 0 3.2.7 2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.2-.2-.4-.3Z"/></svg>
         واتساب <span class="num" dir="ltr">0122 502 0005</span>
