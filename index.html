@@ -7,7 +7,7 @@
 <meta name="description" content="تفصيل الويفي مجاناً، ٥٪ كاش باك، خصم ٣٠٪ على أقمشة مختارة و١٥٪ على التشكيلة الجديدة — عروض نجيب سليم لفترة محدودة.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --cream:#F6F1EA; --sand:#EBDDC9; --line:#E4D8C6;
@@ -15,7 +15,7 @@
   --brown:#2A1D16; --brown-2:#3B2A1F; --brown-3:#4A3526; --deep:#1E1510;
   --rust:#B4471C; --rust-dk:#8E3714; --rust-lt:#E7A276; --rust-tint:#F8E4D8;
   --gold:#C9A77C; --muted:#D9CBB8; --muted-2:#A8927C;
-  --f-display:"El Messiri",serif;
+  --f-display:"Alexandria","El Messiri",sans-serif;
   --f-body:"IBM Plex Sans Arabic",Tahoma,sans-serif;
   --f-latin:"Cormorant Garamond",Georgia,serif;
   --pad:80px;
@@ -75,11 +75,22 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--rust-lt);outline-of
 .hero h1 .l{white-space:nowrap}
 .hero p{margin:0;font-size:20px;line-height:1.8;color:var(--ink-2);max-width:540px}
 .cd-label{font-size:14px;font-weight:500;color:var(--ink-3);margin-bottom:14px}
-.countdown{display:flex;gap:14px}
-.cd{width:108px;height:116px;border-radius:18px;background:var(--ink);color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.cd b{font-family:var(--f-latin);font-size:52px;font-weight:600;line-height:1}
+/* Days read loudest; each step down fades out towards the seconds. */
+.countdown{display:grid;grid-template-columns:1.3fr 1.12fr 1fr .92fr;gap:2px;width:470px;max-width:100%;
+           border-radius:20px;overflow:hidden;background:rgba(42,29,22,.12)}
+.cd{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    padding:20px 6px;color:var(--cream);background:rgba(42,29,22,.92)}
+.cd:nth-child(2){background:rgba(42,29,22,.82)}
+.cd:nth-child(3){background:rgba(42,29,22,.71)}
+.cd:nth-child(4){background:rgba(42,29,22,.6)}
+.cd b{font-family:var(--f-display);font-weight:700;line-height:1;letter-spacing:-1px}
+.cd b[data-d]{font-size:48px}
+.cd b[data-h]{font-size:39px}
+.cd b[data-m]{font-size:32px}
+.cd b[data-s]{font-size:26px}
 .cd span{font-size:13px;color:var(--gold)}
-.cd.first{background:var(--rust);color:#fff}.cd.first span{color:#FBE3D4}
+.cd:nth-child(3) span{font-size:12px}
+.cd:nth-child(4) span{font-size:11px}
 .actions{display:flex;gap:14px;flex-wrap:wrap}
 .btn{height:58px;padding:0 32px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:12px;font-size:17px;font-weight:600;transition:background .25s}
 .btn-dark{background:var(--ink);color:var(--cream)}.btn-dark:hover{background:#3d2b20}
@@ -178,9 +189,16 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
 .final .btn-white .num{font-family:var(--f-latin);font-size:24px;font-weight:700;color:var(--rust)}
 .final .btn-ghost{border:1px solid #fff;color:#fff;font-weight:500}
 .final .btn-ghost:hover{background:rgba(255,255,255,.12)}
-.final .countdown{position:relative}
-.final .cd{width:96px;height:104px;background:rgba(42,29,22,.28);color:#fff}
-.final .cd b{font-size:46px}.final .cd span{color:#fff}
+.final .countdown{position:relative;width:420px;background:rgba(255,255,255,.3)}
+.final .cd{padding:17px 6px;background:rgba(42,29,22,.45);color:#fff}
+.final .cd:nth-child(2){background:rgba(42,29,22,.37)}
+.final .cd:nth-child(3){background:rgba(42,29,22,.29)}
+.final .cd:nth-child(4){background:rgba(42,29,22,.21)}
+.final .cd b[data-d]{font-size:42px}
+.final .cd b[data-h]{font-size:34px}
+.final .cd b[data-m]{font-size:28px}
+.final .cd b[data-s]{font-size:23px}
+.final .cd span,.final .cd:nth-child(4) span{color:#FBE3D4}
 
 /* ---------- footer ---------- */
 .footer{background:var(--deep);color:var(--muted);padding-block:56px}
@@ -229,11 +247,8 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   .swipe{display:flex;justify-content:center;gap:6px;margin-top:2px}
   .swipe span{width:6px;height:6px;border-radius:50%;background:var(--muted-2);opacity:.45;transition:opacity .25s,width .25s}
   .swipe span.on{opacity:1;width:18px;border-radius:3px;background:var(--rust)}
-  .cd-wrap .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-      background:rgba(246,241,234,.16);border-radius:16px;overflow:hidden;
-      box-shadow:0 16px 34px -20px rgba(42,29,22,.9)}
-  .cd{width:auto;height:auto;padding:13px 4px;border-radius:0;gap:4px}
-  .cd.first{background:var(--ink)}.cd.first span{color:var(--gold)}
+  .cd-wrap .countdown{width:100%;gap:1px;border-radius:16px;
+      box-shadow:0 14px 30px -22px rgba(42,29,22,.85)}
   .actions{flex-direction:column}.btn{height:54px;font-size:16px;width:100%}
   .offers{padding-block:52px 56px}
   .sec-head{flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:26px}
@@ -280,10 +295,13 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   .final .actions{flex-direction:row;gap:9px}
   .final .actions .btn{height:46px;font-size:14px;padding:0 10px;flex:1;width:auto}
   .final .btn-white .num{font-size:19px}
-  .final .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-      background:rgba(255,255,255,.28);border-radius:14px;overflow:hidden;box-shadow:none}
-  .final .cd{width:auto;height:auto;padding:10px 4px;border-radius:0;gap:2px;background:rgba(42,29,22,.45)}
-  .final .cd b{font-size:22px}.final .cd span{font-size:9.5px}
+  .final .countdown{width:100%;gap:1px;border-radius:14px;box-shadow:none}
+  .final .cd{padding:10px 3px;gap:2px}
+  .final .cd b[data-d]{font-size:27px}
+  .final .cd b[data-h]{font-size:23px}
+  .final .cd b[data-m]{font-size:19px}
+  .final .cd b[data-s]{font-size:16px}
+  .final .cd span{font-size:9.5px}
   .footer{padding-block:28px}
   .footer .row1{gap:16px}
   .footer .brand-logo{height:34px}
@@ -301,9 +319,13 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   .fan-wrap .card{width:268px}
   .fan-wrap .card .img{width:268px;height:334px}
   .cd-label{font-size:12.5px;margin-bottom:10px}
-  .cd{height:auto;padding:12px 4px}
-  .cd b{font-size:27px}
-  .cd span{font-size:10px;letter-spacing:.3px}
+  .cd{padding:12px 3px;gap:3px}
+  .cd b[data-d]{font-size:31px}
+  .cd b[data-h]{font-size:26px}
+  .cd b[data-m]{font-size:21px}
+  .cd b[data-s]{font-size:18px}
+  .cd span{font-size:10px;letter-spacing:.2px}
+  .cd:nth-child(3) span,.cd:nth-child(4) span{font-size:9.5px}
   .hero .actions{flex-direction:row;gap:10px}
   .hero .btn{height:48px;font-size:15px;padding:0 12px;flex:1}
 }
