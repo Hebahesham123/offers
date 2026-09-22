@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" width="240" height="80" role="img" aria-label="كاش Cash">
+<g fill="none" stroke="#1E7A4B" stroke-width="4" stroke-linejoin="round">
+  <path d="M24 18h56a8 8 0 0 1 8 8v28" stroke-opacity=".4"/>
+  <rect x="14" y="26" width="62" height="36" rx="6"/>
+  <circle cx="45" cy="44" r="9"/>
+</g>
+<text x="102" y="52" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="bold"
+      fill="#1E7A4B" letter-spacing="2">CASH</text>
+</svg>

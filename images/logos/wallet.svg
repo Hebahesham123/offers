@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" width="240" height="80" role="img" aria-label="محفظة إلكترونية E-wallet">
+<g fill="none" stroke="#B4471C" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M74 28H26a10 10 0 0 0-10 10v18a10 10 0 0 0 10 10h48a6 6 0 0 0 6-6V34a6 6 0 0 0-6-6Z"/>
+  <path d="M16 38V28a8 8 0 0 1 5.6-7.6l38-11"/>
+</g>
+<circle cx="66" cy="47" r="5.5" fill="#B4471C"/>
+<text x="96" y="40" font-family="Tahoma, 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="bold" fill="#2A1D16">محفظة</text>
+<text x="96" y="62" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#6B5646" letter-spacing="1.5">E-WALLET</text>
+</svg>
