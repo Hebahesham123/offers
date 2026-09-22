@@ -221,10 +221,9 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   .hero .actions .btn-line{width:100%}
   .fan-wrap{width:auto;height:auto;transform:none;margin-inline:calc(var(--pad)*-1)}
   .fan-wrap .grid{margin-inline:0;padding:4px var(--pad) 8px}
-  .fan-wrap .sec-head{margin:0 0 12px;padding-inline:var(--pad);gap:4px}
-  .fan-wrap .sec-head .en{font-size:12px;letter-spacing:4px}
-  .fan-wrap .sec-head h2{margin:2px 0 0;font-size:26px;line-height:1.3}
-  .fan-wrap .sec-head p{display:none}
+  .fan-wrap .sec-head{margin:12px 0 0;padding-inline:var(--pad);gap:4px}
+  .fan-wrap .sec-head .en,.fan-wrap .sec-head p{display:none}
+  .fan-wrap .sec-head h2{margin:0;font-size:26px;line-height:1.3}
   .swipe{display:flex;justify-content:center;gap:6px;margin-top:2px}
   .swipe span{width:6px;height:6px;border-radius:50%;background:var(--muted-2);opacity:.45;transition:opacity .25s,width .25s}
   .swipe span.on{opacity:1;width:18px;border-radius:3px;background:var(--rust)}
@@ -692,7 +691,7 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   function layout() {
     if (!fanWrap || !grid) return;
     if (phone.matches) {
-      if (secHead && secHead.parentNode !== fanWrap) fanWrap.insertBefore(secHead, fanWrap.firstChild);
+      if (secHead && secHead.parentNode !== fanWrap) fanWrap.appendChild(secHead);
       if (grid.parentNode !== fanWrap) fanWrap.insertBefore(grid, swipe);
       bindRail(grid, '.card');
     } else {
