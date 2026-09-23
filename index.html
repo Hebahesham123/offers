@@ -170,14 +170,10 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
 .wallets[hidden]{display:none!important}
 .wallets .wl-head{flex-basis:100%;margin:0 0 2px;font-size:13px;font-weight:600;color:var(--gold)}
 .wallets .pm .logo{background:#fff}
-.banks-panel{flex-direction:column;align-items:center;gap:22px}
-.banks{width:100%;display:flex;flex-direction:column;gap:18px}
-.banks .label{font-size:15px;color:var(--gold)}
-.banks .viewport{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.banks .row{display:flex;gap:12px;width:max-content;animation:mq 40s linear infinite}
-.banks .row:hover{animation-play-state:paused}
-.bank{width:176px;height:80px;flex-shrink:0;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px}
-.bank img{max-width:100%;max-height:62px;object-fit:contain}
+.bank-note{flex-basis:100%;margin:0 0 2px;font-size:14px;color:var(--gold)}
+.banks-panel .pm{width:176px}
+.banks-panel .pm .logo{height:74px}
+.banks-panel .pm .logo img{max-height:58px}
 .fine{font-size:13px;color:#8A7461}
 
 /* ---------- final CTA ---------- */
@@ -266,7 +262,7 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   .card .cta{height:46px;font-size:15px}
   .pay{padding-block:52px;gap:24px}
   .pay .en{font-size:13px;letter-spacing:5px}
-  .pay h2{font-size:32px;line-height:1.25}.pay .lead{font-size:14px}
+  .pay h2{font-size:26px;line-height:1.35}.pay .lead{font-size:13.5px}
   .pick{gap:8px}
   .pick-b{padding:14px 6px;gap:9px;border-radius:17px;font-size:13px}
   .pick-b .ico{width:42px;height:42px;border-radius:13px}
@@ -281,9 +277,10 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   .wallets{gap:9px;padding:12px 6px}
   .wallets .pm{width:calc(33.333% - 8px)}
   .wallets{padding:14px 10px;gap:10px}
-  .banks{gap:12px;margin-inline:-11px;width:calc(100% + 22px)}
-  .banks-panel{gap:16px}
-  .banks-panel .pm{width:170px}
+  .bank-note{font-size:12px;margin-bottom:0}
+  .banks-panel .pm{width:calc(50% - 5px)}
+  .banks-panel .pm .logo{height:62px}
+  .banks-panel .pm .logo img{max-height:48px}
   .banks .label{font-size:13px}
   .bank{width:132px;height:62px;padding:6px}.bank img{max-height:48px}
   .brand-logo{height:38px}
@@ -542,16 +539,15 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   </div>
 
   <div class="panel banks-panel" id="panel-banks" role="region" aria-labelledby="tab-banks" hidden>
+  <p class="bank-note">التقسيط متاح ببطاقات الائتمان من</p>
   <figure class="pm">
-    <span class="logo"><img src="images/logos/all-banks.svg" alt="كل البنوك" loading="lazy" width="240" height="80"></span>
-    <figcaption><b>كل البنوك</b><small>قسّط ببطاقتك الائتمانية</small></figcaption>
+    <span class="logo"><img src="images/logos/nbe.svg" alt="البنك الأهلي المصري" loading="lazy" width="240" height="92"></span>
+    <figcaption><b>البنك الأهلي المصري</b><small>ببطاقة الائتمان</small></figcaption>
   </figure>
-  <div class="banks">
-    <div class="label">التقسيط متاح ببطاقات الائتمان من</div>
-    <div class="viewport" dir="ltr">
-      <div class="row" id="banks"></div>
-    </div>
-  </div>
+  <figure class="pm">
+    <span class="logo"><img src="images/logos/cib.svg" alt="البنك التجاري الدولي CIB" loading="lazy" width="240" height="92"></span>
+    <figcaption><b>التجاري الدولي CIB</b><small>ببطاقة الائتمان</small></figcaption>
+  </figure>
 </div>
   </div>
 
@@ -630,15 +626,6 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
     'قسّط مع فاليو · سهولة · سيمبل · وكل البنوك'
   ];
 
-  var BANKS = [
-    ['cib.svg', 'البنك التجاري الدولي CIB'], ['nbe.svg', 'البنك الأهلي المصري'],
-    ['banquemisr.svg', 'بنك مصر'], ['qnbalahli.png', 'QNB الأهلي'],
-    ['bdc.svg', 'بنك القاهرة'], ['adib.svg', 'مصرف أبوظبي الإسلامي'],
-    ['saib.svg', 'بنك قناة السويس'], ['faisal.png', 'بنك فيصل الإسلامي المصري'],
-    ['hsbc.svg', 'بنك HSBC'], ['mashreq.svg', 'بنك المشرق'],
-    ['nbk.svg', 'بنك الكويت الوطني'], ['enbd.png', 'بنك الإمارات دبي الوطني']
-  ];
-
   /* ===== Marquee (duplicated for a seamless loop) ===== */
   var mq = document.getElementById('marquee');
   var html = '';
@@ -648,16 +635,6 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
     });
   }
   mq.innerHTML = html;
-
-  /* ===== Banks strip ===== */
-  var banks = document.getElementById('banks');
-  var bh = '';
-  for (var i = 0; i < 2; i++) {
-    BANKS.forEach(function (b, j) {
-      bh += '<div class="bank"' + (i ? ' aria-hidden="true"' : '') + '><img src="images/logos/' + b[0] + '" alt="' + (i ? '' : b[1]) + '" loading="lazy"></div>';
-    });
-  }
-  banks.innerHTML = bh;
 
   /* ===== Countdown ===== */
   var end = new Date(OFFER_END).getTime();
