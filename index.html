@@ -4,7 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>نجيب سليم | عروض لفترة محدودة</title>
-<meta name="description" content="تفصيل الويفي مجاناً، ٥٪ كاش باك، خصم ٣٠٪ على أقمشة مختارة و١٥٪ على التشكيلة الجديدة — عروض نجيب سليم لفترة محدودة.">
+<meta name="description" content="نجيب سليم الآن في تريڤيوم مول زايد — اكتشف أحدث مجموعتنا من الأقمشة واستمتع بخصم ١٥٪ لعملاء الشيخ زايد.">
+<!-- Vercel Web Analytics: visitors, page views, referrers, countries.
+     Nothing to configure here — switch it on in the Vercel dashboard under
+     the project's Analytics tab. Off, or hosted elsewhere, it just 404s. -->
+<script defer src="/_vercel/insights/script.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
@@ -501,6 +505,11 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
   var WHATSAPP = '201111017791';
   var SHOP_URL = 'https://www.naguibselim.com';
 
+  /* Google Analytics 4 measurement ID — looks like 'G-XXXXXXXXXX'.
+     Get it at analytics.google.com → Admin → Data streams → your web stream.
+     Left empty, no analytics script loads and no requests are made. */
+  var GA_ID = '';
+
   /* Pre-filled WhatsApp message per offer card */
   var WA_MESSAGES = {
     zayed:   'السلام عليكم 👋 مهتم بعرض «خصم ١٥٪ لعملاء الشيخ زايد» في فرع تريڤيوم مول زايد. ممكن التفاصيل؟',
@@ -513,6 +522,80 @@ button.logo[aria-expanded="true"]{box-shadow:0 0 0 3px var(--rust)}
     'أحدث مجموعة أقمشة وصلت',
     'قسّط مع فاليو · سهولة · سيمبل'
   ];
+
+  /* ===== Analytics =====
+     Loads Google Analytics 4 only when GA_ID is filled in above, then reports
+     how long each visitor actually stays and what they tapped. */
+  if (GA_ID) {
+    var gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(gaScript);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+
+  function track(name, params) {
+    if (window.gtag) gtag('event', name, params || {});
+  }
+
+  /* ---- Time on page ----
+     Counts only while the tab is actually visible, so a page left open in a
+     background tab doesn't inflate the number. Milestones fire as the visit
+     goes on, so a visit still reports something if the closing event is lost
+     (phones often kill the page before it can send). */
+  var visibleMs = 0, lastResume = Date.now(), sentFinal = false;
+  var MILESTONES = [15, 30, 60, 120, 300], milestoneAt = 0;
+
+  function visibleSeconds() {
+    var live = document.hidden ? 0 : Date.now() - lastResume;
+    return Math.round((visibleMs + live) / 1000);
+  }
+
+  setInterval(function () {
+    var secs = visibleSeconds();
+    while (milestoneAt < MILESTONES.length && secs >= MILESTONES[milestoneAt]) {
+      track('time_on_page', { seconds: MILESTONES[milestoneAt] });
+      milestoneAt++;
+    }
+  }, 5000);
+
+  function reportVisit() {
+    if (sentFinal) return;
+    sentFinal = true;
+    track('visit_end', { seconds: visibleSeconds() });
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      visibleMs += Date.now() - lastResume;
+      reportVisit();          /* phones fire this instead of pagehide */
+    } else {
+      lastResume = Date.now();
+      sentFinal = false;      /* they came back — let the next exit report too */
+    }
+  });
+  window.addEventListener('pagehide', reportVisit);
+
+  /* ---- What they tapped ---- */
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('a, button');
+    if (!el) return;
+    if (el.hasAttribute('data-wa')) {
+      track('whatsapp_click', { offer: el.getAttribute('data-wa'),
+                                from: el.tagName === 'A' && el.classList.contains('img') ? 'image' : 'button' });
+    } else if (el.getAttribute('href') && el.getAttribute('href').indexOf('tel:') === 0) {
+      track('call_click', {});
+    } else if (el.classList.contains('pick-b')) {
+      track('payment_open', { method: el.id.replace('tab-', '') });
+    } else if (el.id === 'wallet-toggle') {
+      track('wallets_open', {});
+    } else if (el.getAttribute('href') === SHOP_URL) {
+      track('shop_online_click', {});
+    }
+  }, true);
 
   /* ===== Marquee (duplicated for a seamless loop) ===== */
   var mq = document.getElementById('marquee');
